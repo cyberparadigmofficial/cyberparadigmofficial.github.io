@@ -1,0 +1,110 @@
+.chroma-grid {
+    position: relative;
+    display: grid;
+    /* Use dynamic columns/rows if needed, or default to auto-fit */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem;
+    perspective: 1000px;
+    --x: 50%;
+    --y: 50%;
+    --r: 300px;
+}
+
+.chroma-card {
+    position: relative;
+    background: #fff;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    /* aspect-ratio: 3/4; Removed fixed aspect ratio for better fit */
+}
+
+.chroma-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.chroma-img-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    /* Square aspect ratio */
+    overflow: hidden;
+    background: #f0f0f0;
+}
+
+.chroma-img-wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.chroma-card:hover .chroma-img-wrapper img {
+    transform: scale(1.05);
+}
+
+.chroma-info {
+    padding: 1.5rem;
+    text-align: center;
+    background: white;
+    position: relative;
+    z-index: 2;
+}
+
+.chroma-info .name {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #353535;
+    margin-bottom: 0.25rem;
+}
+
+.chroma-info .handle {
+    display: block;
+    font-size: 0.875rem;
+    color: #4F46E5;
+    /* Adjust per theme */
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.chroma-info .role {
+    font-size: 0.875rem;
+    color: #8A897C;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.chroma-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+    background: radial-gradient(circle at var(--x) var(--y),
+            transparent 0%,
+            rgba(255, 255, 255, 0.8) var(--r),
+            #fff calc(var(--r) + 100px));
+    opacity: 0;
+    /* Hidden by default to let regular content show */
+    /* Only show overlay if we want that spotlight effect obscuring other items. 
+       If we want just highlighting, we might invert logic or use mix-blend-mode.
+       For now, let's keep it minimal or disable if it hides too much.
+    */
+    display: none;
+    /* Disabling the heavy overlay for now as it might cover content inappropriately */
+}
+
+.chroma-fade {
+    /* Optional global fade layer */
+    pointer-events: none;
+}
